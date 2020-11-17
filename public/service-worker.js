@@ -1,6 +1,6 @@
 console.log("check");
-const CACHE_NAME = "static-cache-v2";
-const DATA_CACHE_NAME = "data-cache-v2";
+const CACHE_NAME = "static-cache-v6";
+const DATA_CACHE_NAME = "data-cache-v6";
 
 const FILES_TO_CACHE = [
   "/",
@@ -24,7 +24,7 @@ self.addEventListener("install", function (evt) {
   evt.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(FILES_TO_CACHE))
   );
-
+    console.log(FILES_TO_CACHE);
   // tell the browser to activate this service worker immediately once it
   // has finished installing
   self.skipWaiting();
