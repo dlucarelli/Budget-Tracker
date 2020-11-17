@@ -1,11 +1,8 @@
+console.log("check");
+const CACHE_NAME = "static-cache-v2";
+const DATA_CACHE_NAME = "data-cache-v2";
 
-const CACHE_NAME = "static-cache-v1";
-const DATA_CACHE_NAME = "data-cache-v1";
 
-const iconSizes = ["192", "512"];
-const iconFiles = iconSizes.map(
-  (size) => `/icons/icon-${size}x${size}.png`
-);
 
 const staticFilesToPreCache = [
   "/",
@@ -15,18 +12,25 @@ const staticFilesToPreCache = [
   "/favicon.ico",
   "/manifest.webmanifest",
   "/styles.css",
-].concat(iconFiles);
+  "/icons/icon-192x192.png",
+  "/icons/icon-512x512.png"
+]
 
 
 // install
-self.addEventListener("install", function(evt) {
+self.addEventListener("install", function (evt) {
+  // pre cache transaction data
   evt.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      console.log("Your files were pre-cached successfully!");
-      return cache.addAll(staticFilesToPreCache);
-    })
+    caches.open(DATA_CACHE_NAME).then((cache) => cache.add("/api/transaction"))
+  );
+    
+  // pre cache all static assets
+  evt.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(staticFilesToPreCache))
   );
 
+  // tell the browser to activate this service worker immediately once it
+  // has finished installing
   self.skipWaiting();
 });
 
