@@ -3,8 +3,8 @@
     "short_name": "Budget App",
     "start_url": "/",
     "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#080808",
+    "background_color": "#faf8e6",
+    "theme_color": "#6d7078",
     "description": "Budget tracking app for travel, compatible offline.",
     "icons": [{
       "src": "./icons/icon-192x192.png",
